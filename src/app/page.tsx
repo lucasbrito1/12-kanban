@@ -1,19 +1,17 @@
 "use client";
 
+import { CardsProvider } from "app/context/CardsProvider";
 import logo from "assets/logo.svg";
-import Content from "components/Content";
+import ColumnsComponent from "components/ColumnsComponent";
 import Header from "components/Header";
 import SearchBar from "components/SearchBar";
 import { Cog, FileText, Tablet, Users } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { CARDS, CardItem } from "utils/cards";
 
 export default function Home() {
-  const [filteredCards, setFilteredCards] = useState<CardItem[]>(CARDS);
-
   return (
     <div className="flex">
       <div className="w-44 pl-9 pr-7 pt-8">
@@ -40,12 +38,11 @@ export default function Home() {
 
       <div className="bg-white-100 flex flex-col gap-8 w-full h-screen mt-1 rounded-tl-[2rem] pt-12 pb-[] px-8">
         <Header />
-        <SearchBar setFilteredCards={setFilteredCards} />
         <DndProvider backend={HTML5Backend}>
-          <Content
-            filteredCards={filteredCards}
-            setFilteredCards={setFilteredCards}
-          />
+          <CardsProvider>
+            <SearchBar />
+            <ColumnsComponent />
+          </CardsProvider>
         </DndProvider>
       </div>
     </div>

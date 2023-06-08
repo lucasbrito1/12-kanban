@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  children: string;
+  children: React.ReactNode;
 }
 
 export default function Tag({ children }: Props) {
