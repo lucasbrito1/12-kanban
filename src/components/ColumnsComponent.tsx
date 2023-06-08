@@ -1,38 +1,52 @@
 import { useCardsContext } from "app/context/CardsProvider";
 import Card from "components/Card";
+import { useCallback } from "react";
 
 export default function ColumnsComponent() {
-  const { listColumns } = useCardsContext();
+  const { listColumns, moveCard } = useCardsContext();
+
+  const handleCardMove = useCallback(
+    (
+      draggedListIndex: number,
+      targetListIndex: number,
+      draggedIndex: number,
+      targetIndex: number
+    ) => {
+      moveCard(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
+    },
+    [moveCard]
+  );
 
   return (
     <div className="flex gap-12 h-[60%]">
       {listColumns
         .filter((column) => column.cards.length)
-        .map((card, index) => (
-          <div key={index}>
-            <div>
-              <div className="px-6" key={card.status}>
-                <p className="py-6 text-black font-bold text-xl">
-                  {card.status}
-                </p>
-              </div>
-              <div
-                className={`flex flex-col gap-6 px-6 scrollbar h-full pt-3 pb-3 overflow-auto overflow-x-hidden`}
-              >
-                {card.cards.map((card) => {
-                  return (
+        .map((column, listIndex) => {
+          return (
+            <div key={listIndex}>
+              <div>
+                <div className="px-6" key={column.status}>
+                  <p className="py-6 text-black font-bold text-xl">
+                    {column.status}
+                  </p>
+                </div>
+                <div
+                  className={`flex flex-col gap-6 px-6 scrollbar h-full pt-3 pb-3 overflow-auto overflow-x-hidden`}
+                >
+                  {column.cards.map((card, index) => (
                     <Card
-                      key={card.id}
+                      key={card?.id}
                       card={card}
                       index={index}
-                      listIndex={index}
+                      listIndex={listIndex}
+                      onMoveCard={handleCardMove}
                     />
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
     </div>
   );
 }

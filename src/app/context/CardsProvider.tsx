@@ -5,7 +5,12 @@ import { produce } from "immer";
 type CardsContextType = {
   listColumns: Columns[];
   setListColumns: React.Dispatch<React.SetStateAction<Columns[]>>;
-  move: (fromList: number, toList: number, from: number, to: number) => void;
+  moveCard: (
+    draggedListIndex: number,
+    targetListIndex: number,
+    draggedIndex: number,
+    targetIndex: number
+  ) => void;
 };
 
 interface Props {
@@ -17,13 +22,21 @@ const CardsContext = createContext<CardsContextType | undefined>(undefined);
 export const CardsProvider = ({ children }: Props) => {
   const [listColumns, setListColumns] = useState<Columns[]>(Columns);
 
-  function move(fromList: number, toList: number, from: number, to: number) {
+  function moveCard(
+    draggedListIndex: number,
+    targetListIndex: number,
+    draggedIndex: number,
+    targetIndex: number
+  ) {
     setListColumns(
       produce(listColumns, (draft) => {
-        const dragged = draft[fromList].cards[from];
+        const dragged = draft[draggedListIndex].cards[draggedIndex];
 
-        draft[fromList].cards.splice(from, 1);
-        draft[toList].cards.splice(to, 0, dragged);
+        // Remove o card da coluna original
+        draft[draggedListIndex].cards.splice(draggedIndex, 1);
+
+        // Insere o card na nova coluna na posição desejada
+        draft[targetListIndex].cards.splice(targetIndex, 0, dragged);
       })
     );
   }
@@ -33,7 +46,7 @@ export const CardsProvider = ({ children }: Props) => {
       value={{
         listColumns,
         setListColumns,
-        move,
+        moveCard,
       }}
     >
       {children}

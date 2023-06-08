@@ -1,4 +1,3 @@
-import { useCardsContext } from "app/context/CardsProvider";
 import Tag from "components/Tag";
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
@@ -8,23 +7,20 @@ interface Props {
   card: (typeof Columns)[0]["cards"][0];
   index: number;
   listIndex: number;
+  onMoveCard: (
+    draggedListIndex: number,
+    targetListIndex: number,
+    draggedIndex: number,
+    targetIndex: number
+  ) => void;
 }
 
-export default function Card({ card, index, listIndex }: Props) {
+export default function Card({ card, index, listIndex, onMoveCard }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const { move } = useCardsContext();
-
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "card",
-    item: { index, listIndex },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }));
 
   const [, drop] = useDrop({
     accept: "card",
-    hover(item: Props, monitor) {
+    hover(item: Props) {
       const draggedListIndex = item.listIndex;
       const targetListIndex = listIndex;
 
@@ -38,45 +34,27 @@ export default function Card({ card, index, listIndex }: Props) {
         return;
       }
 
-      const targetSize = ref.current?.getBoundingClientRect();
-      const targetCenter = targetSize
-        ? (targetSize.bottom - targetSize.top) / 2
-        : null;
-      const draggedOffset = monitor.getClientOffset();
-      const draggedTop =
-        draggedOffset && targetSize ? draggedOffset.y - targetSize?.top : null;
-
-      if (
-        draggedIndex < targetIndex &&
-        draggedTop !== null &&
-        targetCenter !== null &&
-        draggedTop < targetCenter
-      ) {
-        return;
-      }
-
-      if (
-        draggedIndex > targetIndex &&
-        draggedTop !== null &&
-        targetCenter !== null &&
-        draggedTop > targetCenter
-      ) {
-        return;
-      }
-
-      move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
+      onMoveCard(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
 
       item.index = targetIndex;
       item.listIndex = targetListIndex;
     },
   });
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "card",
+    item: { index, listIndex },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   drag(drop(ref));
 
   return (
     <div
       ref={ref}
-      className={`rounded-lg p-6 w-full shadow-card ${
+      className={`rounded-lg p-6 w-full cursor-pointer shadow-card ${
         isDragging
           ? "border-2 border-dashed border-gray-100 bg-transparent shadow-none p-[22px]"
           : "bg-white"
