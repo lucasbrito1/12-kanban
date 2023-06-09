@@ -1,4 +1,4 @@
-import { useCardsContext } from "app/context/CardsProvider";
+import { useCardsContext } from "context/CardsProvider";
 import Card from "components/Card";
 import { useCallback } from "react";
 

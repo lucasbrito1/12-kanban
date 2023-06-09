@@ -1,6 +1,6 @@
 "use client";
 
-import { useCardsContext } from "app/context/CardsProvider";
+import { useCardsContext } from "context/CardsProvider";
 import Button from "components/Button";
 import Input from "components/Input";
 import React, { ChangeEvent, useState } from "react";

@@ -54,7 +54,7 @@ export default function Card({ card, index, listIndex, onMoveCard }: Props) {
   return (
     <div
       ref={ref}
-      className={`rounded-lg p-6 w-full cursor-pointer shadow-card ${
+      className={`rounded-lg p-6 w-full cursor-grab shadow-card ${
         isDragging
           ? "border-2 border-dashed border-gray-100 bg-transparent shadow-none p-[22px]"
           : "bg-white"

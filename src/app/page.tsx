@@ -1,6 +1,6 @@
 "use client";
 
-import { CardsProvider } from "app/context/CardsProvider";
+import { CardsProvider } from "context/CardsProvider";
 import logo from "assets/logo.svg";
 import ColumnsComponent from "components/ColumnsComponent";
 import Header from "components/Header";
