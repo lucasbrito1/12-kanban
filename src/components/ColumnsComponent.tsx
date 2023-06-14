@@ -18,49 +18,46 @@ export default function ColumnsComponent() {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="column" direction="vertical" type="column">
-        {(provided) => (
-          <div
-            className="flex gap-12 h-[60%]"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
+      <div className="flex gap-12 h-[60%]">
+        {listColumns.map((column, columnIndex) => (
+          <Droppable
+            key={columnIndex}
+            droppableId={column.status}
+            direction="vertical"
+            type="column"
           >
-            {listColumns
-              .filter((column) => column.cards.length)
-              .map((column, listIndex) => {
-                return (
-                  <div key={listIndex}>
-                    <div>
-                      <div className="px-6" key={column.status}>
-                        <p className="py-6 text-black font-bold text-xl">
-                          {column.status}
-                        </p>
-                      </div>
-                      <div className={`flex flex-col gap-6 px-6 scrollbar  `}>
-                        {column.cards.map((card, index) => (
-                          <Draggable
-                            key={card.id}
-                            draggableId={card.id.toString()}
-                            index={index}
-                          >
-                            {(provided) => (
-                              <Card
-                                card={card}
-                                innerRef={provided.innerRef}
-                                draggableHandleProps={provided.dragHandleProps}
-                                draggableProps={provided.draggableProps}
-                              />
-                            )}
-                          </Draggable>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        )}
-      </Droppable>
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <div className="px-6">
+                  <p className="py-6 text-black font-bold text-xl">
+                    {column.status}
+                  </p>
+                </div>
+                <div className={`flex flex-col gap-6 px-6 scrollbar`}>
+                  {column.cards.map((card, cardIndex) => (
+                    <Draggable
+                      key={card.id}
+                      draggableId={card.id.toString()}
+                      index={cardIndex}
+                    >
+                      {(provided) => (
+                        <Card
+                          card={card}
+                          innerRef={provided.innerRef}
+                          draggableHandleProps={provided.dragHandleProps}
+                          draggableProps={provided.draggableProps}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        ))}
+      </div>
     </DragDropContext>
   );
 }
