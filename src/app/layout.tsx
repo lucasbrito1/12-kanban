@@ -1,4 +1,5 @@
 import "app/globals.css";
+import { CardsProvider } from "context/CardsProvider";
 
 export default function RootLayout({
   children,
@@ -19,7 +20,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="overflow-hidden">{children}</body>
+      <CardsProvider>
+        <body className="">{children}</body>
+      </CardsProvider>
     </html>
   );
 }

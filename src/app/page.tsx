@@ -1,6 +1,7 @@
 "use client";
 
 import { CardsProvider } from "context/CardsProvider";
+import { useCardsContext } from "context/CardsProvider";
 import logo from "assets/logo.svg";
 import ColumnsComponent from "components/ColumnsComponent";
 import Header from "components/Header";
@@ -8,8 +9,7 @@ import SearchBar from "components/SearchBar";
 import { Cog, FileText, Tablet, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { DragDropContext } from "react-beautiful-dnd";
 
 export default function Home() {
   return (
@@ -38,12 +38,8 @@ export default function Home() {
 
       <div className="bg-white-100 flex flex-col gap-8 w-full h-screen mt-1 rounded-tl-[2rem] pt-12 pb-[] px-8">
         <Header />
-        <DndProvider backend={HTML5Backend}>
-          <CardsProvider>
-            <SearchBar />
-            <ColumnsComponent />
-          </CardsProvider>
-        </DndProvider>
+        <SearchBar />
+        <ColumnsComponent />
       </div>
     </div>
   );
