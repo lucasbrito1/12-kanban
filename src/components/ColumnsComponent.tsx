@@ -6,8 +6,6 @@ import {
   DropResult,
   Droppable,
 } from "react-beautiful-dnd";
-import { useState } from "react";
-import { Columns } from "utils/cards";
 
 export default function ColumnsComponent() {
   const { listColumns, setListColumns } = useCardsContext();
@@ -33,7 +31,7 @@ export default function ColumnsComponent() {
                     {column.status}
                   </p>
                 </div>
-                <div className={`flex flex-col gap-6 px-6 scrollbar`}>
+                <div className="flex flex-col gap-6 px-6 scrollbar h-full pt-3 pb-3 overflow-auto overflow-x-hidden">
                   {column.cards.map((card, cardIndex) => (
                     <Draggable
                       key={card.id}

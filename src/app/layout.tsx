@@ -21,7 +21,7 @@ export default function RootLayout({
         />
       </head>
       <CardsProvider>
-        <body className="">{children}</body>
+        <body className="overflow-hidden">{children}</body>
       </CardsProvider>
     </html>
   );

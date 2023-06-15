@@ -36,7 +36,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-white-100 flex flex-col gap-8 w-full h-screen mt-1 rounded-tl-[2rem] pt-12 pb-[] px-8">
+      <div className="bg-white-100 flex flex-col gap-8 w-full h-screen mt-1 rounded-tl-[2rem] pt-12 px-8 overflow-hidden">
         <Header />
         <SearchBar />
         <ColumnsComponent />
