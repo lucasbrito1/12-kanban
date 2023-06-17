@@ -6,6 +6,8 @@ import {
   DropResult,
   Droppable,
 } from "react-beautiful-dnd";
+import { useEffect } from "react";
+import { Columns } from "utils/cards";
 
 export default function ColumnsComponent() {
   const { listColumns, setListColumns } = useCardsContext();
@@ -38,6 +40,16 @@ export default function ColumnsComponent() {
       }
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setListColumns(Columns);
+    }, 1000);
+  }, [setListColumns]);
+
+  if (listColumns.length === 0) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
