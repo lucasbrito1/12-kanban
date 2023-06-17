@@ -1,7 +1,5 @@
 "use client";
 
-import { CardsProvider } from "context/CardsProvider";
-import { useCardsContext } from "context/CardsProvider";
 import logo from "assets/logo.svg";
 import ColumnsComponent from "components/ColumnsComponent";
 import Header from "components/Header";
@@ -9,7 +7,6 @@ import SearchBar from "components/SearchBar";
 import { Cog, FileText, Tablet, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { DragDropContext } from "react-beautiful-dnd";
 
 export default function Home() {
   return (
