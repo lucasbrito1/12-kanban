@@ -4,6 +4,7 @@ import logo from "assets/logo.svg";
 import ColumnsComponent from "components/ColumnsComponent";
 import Header from "components/Header";
 import SearchBar from "components/SearchBar";
+import { CardsProvider } from "context/CardsProvider";
 import { Cog, FileText, Tablet, Users } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -34,9 +35,11 @@ export default function Home() {
       </div>
 
       <div className="bg-white-100 flex flex-col gap-8 w-full h-screen mt-1 rounded-tl-[2rem] pt-12 px-8 overflow-hidden">
-        <Header />
-        <SearchBar />
-        <ColumnsComponent />
+        <CardsProvider>
+          <Header />
+          <SearchBar />
+          <ColumnsComponent />
+        </CardsProvider>
       </div>
     </div>
   );
