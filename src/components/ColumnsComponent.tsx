@@ -11,7 +11,32 @@ export default function ColumnsComponent() {
   const { listColumns, setListColumns } = useCardsContext();
 
   const handleOnDragEnd = (result: DropResult) => {
-    ("");
+    const { draggableId, source, destination } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    const newColumns = [...listColumns];
+    const sourceColumn = newColumns.find(
+      (column) => column.status === source.droppableId
+    );
+    const destinationColumn = newColumns.find(
+      (column) => column.status === destination.droppableId
+    );
+
+    if (sourceColumn && destinationColumn) {
+      const draggedCard = sourceColumn.cards.find(
+        (card) => card.id === Number(draggableId)
+      );
+
+      if (draggedCard) {
+        const updateCard = { ...draggedCard, status: destination.droppableId };
+        sourceColumn.cards.splice(source.index, 1);
+        destinationColumn.cards.splice(destination.index, 0, updateCard);
+        setListColumns(newColumns);
+      }
+    }
   };
 
   return (

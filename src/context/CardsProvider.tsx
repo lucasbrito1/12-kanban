@@ -6,15 +6,17 @@ import { Columns } from "utils/cards";
 type CardsContextType = {
   listColumns: Columns[];
   setListColumns: React.Dispatch<React.SetStateAction<Columns[]>>;
+  setColumnState: (cards: Columns) => void;
 };
 
 interface Props {
   children: React.ReactNode;
+  setColumnState: (cards: Columns) => void;
 }
 
 const CardsContext = createContext<CardsContextType | undefined>(undefined);
 
-export const CardsProvider = ({ children }: Props) => {
+export const CardsProvider = ({ children, setColumnState }: Props) => {
   const [listColumns, setListColumns] = useState<Columns[]>(Columns);
 
   return (
@@ -22,6 +24,7 @@ export const CardsProvider = ({ children }: Props) => {
       value={{
         listColumns,
         setListColumns,
+        setColumnState,
       }}
     >
       {children}
