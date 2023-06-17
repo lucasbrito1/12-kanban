@@ -41,7 +41,7 @@ export default function ColumnsComponent() {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex gap-12 h-[60%]">
+      <div className="grid grid-cols-3 gap-12">
         {listColumns.map((column, columnIndex) => (
           <Droppable
             key={columnIndex}
@@ -56,7 +56,7 @@ export default function ColumnsComponent() {
                     {column.status}
                   </p>
                 </div>
-                <div className="flex flex-col gap-6 px-6 scrollbar h-full pt-3 pb-3 overflow-auto overflow-x-hidden">
+                <div className="flex flex-col gap-6 px-6 scrollbar h-[28rem] pt-3 pb-3 overflow-auto overflow-x-hidden">
                   {column.cards.map((card, cardIndex) => (
                     <Draggable
                       key={card.id}
