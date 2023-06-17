@@ -1,10 +1,9 @@
 import Tag from "components/Tag";
-import React, { useRef } from "react";
+import React from "react";
 import {
   DraggableProvidedDragHandleProps,
   DraggableProvidedDraggableProps,
 } from "react-beautiful-dnd";
-import { useDrag, useDrop } from "react-dnd";
 import { Columns } from "utils/cards";
 
 interface Props {
@@ -22,12 +21,12 @@ export default function Card({
 }: Props) {
   return (
     <div
-      className={`rounded-lg p-6 w-full shadow-card`}
+      className="rounded-lg p-6 w-full shadow-card"
       {...draggableHandleProps}
       {...draggableProps}
       ref={innerRef}
     >
-      <div className={`flex flex-col gap-[0.625rem]`}>
+      <div className="flex flex-col gap-[0.625rem]">
         <p className="font-bold text-sm text-black">{card.title}</p>
         <p className="font-medium text-sm text-gray-300">{card.content}</p>
         <div className="flex gap-2">
