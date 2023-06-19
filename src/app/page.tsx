@@ -7,9 +7,15 @@ import SearchBar from "components/SearchBar";
 import { CardsProvider } from "context/CardsProvider";
 import { Cog, FileText, Tablet, Users } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const [winReady, setWinReady] = useState(false);
+
+  useEffect(() => {
+    setWinReady(true);
+  }, []);
+
   return (
     <div className="flex">
       <div className="w-44 pl-9 pr-7 pt-8">
@@ -38,7 +44,7 @@ export default function Home() {
         <CardsProvider>
           <Header />
           <SearchBar />
-          <ColumnsComponent />
+          {winReady ? <ColumnsComponent /> : null}
         </CardsProvider>
       </div>
     </div>
