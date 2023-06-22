@@ -39,7 +39,7 @@ export default function SearchBar(/* { setFilteredCards }: Props */) {
     });
 
   return (
-    <div className="flex gap-4 px-6">
+    <div className="md:flex md:flex-row md:gap-4 flex flex-col gap-4 px-6">
       <Button>Filtrar</Button>
       <Input
         value={searchInput}

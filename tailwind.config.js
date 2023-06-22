@@ -23,6 +23,10 @@ module.exports = {
         card: "0px 4px 16px #EAE2FD",
         none: "0px",
       },
+      screens: {
+        sm: "460px",
+        lg: "1120px",
+      },
     },
   },
   plugins: [],
