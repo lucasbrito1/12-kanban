@@ -1,4 +1,4 @@
-<h1 align='center'>Uma kanban</h1>
+<h1 align='center'>Um kanban</h1>
 
 <div align="center">
   <img width="500px" src="/.github/preview.jpg" /> <br>
