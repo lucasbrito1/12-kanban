@@ -68,7 +68,7 @@ export default function ColumnsComponent() {
                     {column.status}
                   </p>
                 </div>
-                <div className="flex flex-col gap-6 px-6 scrollbar  h-[60vh] pt-3 pb-3 overflow-auto overflow-x-hidden">
+                <div className="flex flex-col gap-6 px-6 scrollbar lg:h-[60vh] h-[35vh] pt-3 pb-3 overflow-auto overflow-x-hidden">
                   {column.cards.map((card, cardIndex) => (
                     <Draggable
                       key={card.id}
