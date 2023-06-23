@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Cog, FileText, Menu, Tablet, Users } from "lucide-react";
 import logo from "assets/logo.svg";
@@ -17,7 +17,7 @@ export default function SideBar() {
       className={`${isOpen ? "w-10 pl-2" : "w-44 pl-9"} pr-7 pt-8 duration-300`}
     >
       <div className="flex flex-col gap-8">
-        <Menu className="text-white" onClick={handleOpenMenu} />
+        <Menu className="text-white cursor-pointer" onClick={handleOpenMenu} />
         {isOpen ? "" : <Image src={logo} alt="" />}
       </div>
       <div
